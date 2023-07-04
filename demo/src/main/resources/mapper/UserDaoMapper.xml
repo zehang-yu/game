@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace属性相当于映射文件的名称 属性值任意
+    接口代理方式，属性值要写成接口的完整类名-->
+<mapper namespace="com.fisco.app.DAO.UserDao">
+
+    <!-- resultType属性指定结果的类型的完整包名
+    	目前写的是user是因为后期会起一个别名，
+    	默认的别名就是类名的首字母小写 -->
+    <sql id="insertFields">
+        id, username, signUserId, publicAddress, privateKey, status
+    </sql>
+    <insert id="insertUser" parameterType="User" keyProperty="id">
+        insert into user (<include refid="insertFields"></include>)
+        values(#{id}, #{username}, #{signUserId}, #{publicAddress}, #{privateKey}, #{status})
+    </insert>
+</mapper>
